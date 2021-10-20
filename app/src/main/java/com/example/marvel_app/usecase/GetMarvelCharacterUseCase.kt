@@ -12,7 +12,7 @@ class GetMarvelCharacterUseCase(private val offset: Int) : UseCase<String> {
             val response: Response<JsonResponse<MarvelCharacter>> = ApiClient.service.getCharacters(offset)
 
             if (response.isSuccessful) {
-                Log.d("MainActivity", "execute: nique ta mère ")
+                Log.d("api", "execute: ")
                 Result.success(response.body().toString())
             } else throw IllegalStateException("${response.code()}")
 

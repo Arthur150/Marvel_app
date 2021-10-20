@@ -22,7 +22,8 @@ class MarvelInterceptor : Interceptor {
         }
 
 
-        requestBuilder.url(chain.request().url().newBuilder()
+        requestBuilder.url(
+            chain.request().url.newBuilder()
             .addQueryParameter("ts", ts)
             .addQueryParameter("apikey", publicKey)
             .addQueryParameter("hash", hash)
