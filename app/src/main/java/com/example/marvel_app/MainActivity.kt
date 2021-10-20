@@ -12,6 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         scope.launch {
             val jsonResponse = Gson().fromJson<JsonResponse<MarvelCharacter>>(
-                GetMarvelCharacterUseCase(0).execute().getOrNull(),
+                Gson().toJson(GetMarvelCharacterUseCase(0).execute().getOrNull()),
                 object : TypeToken<JsonResponse<MarvelCharacter>>() {}.type
             )
             Log.d("Main", "onCreate: $jsonResponse")

@@ -6,14 +6,14 @@ import com.example.marvel_app.model.JsonResponse
 import com.example.marvel_app.model.MarvelCharacter
 import retrofit2.Response
 
-class GetMarvelCharacterUseCase(private val offset: Int) : UseCase<String> {
-    override suspend fun execute(): Result<String> {
+class GetMarvelCharacterUseCase(private val offset: Int) : UseCase<JsonResponse<MarvelCharacter>?> {
+    override suspend fun execute(): Result<JsonResponse<MarvelCharacter>?> {
         return try {
             val response: Response<JsonResponse<MarvelCharacter>> = ApiClient.service.getCharacters(offset)
 
             if (response.isSuccessful) {
                 Log.d("api", "execute: ")
-                Result.success(response.body().toString())
+                Result.success(response.body())
             } else throw IllegalStateException("${response.code()}")
 
         } catch (t: Throwable) {
