@@ -3,6 +3,9 @@ plugins {
     id 'kotlin-android'
 }
 
+def localProperties = new Properties()
+localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     compileSdk 31
 
@@ -16,24 +19,19 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    def localProperties = new Properties()
-    localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 
     buildTypes {
+        debug {
+            buildConfigField("String", "marvel_api_key_public", localProperties["marvel_api_key.public"])
+            buildConfigField("String", "marvel_api_key_private", localProperties["marvel_api_key.private"])
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
-    flavorDimensions "environment"
-    productFlavors {
-        development {
-            dimension "environment"
-            resValue("string", "public_api_key", localProperties.get("marvel_api_key.public"))
-            resValue("string", "private_api_key", localProperties.get("marvel_api_key.private"))
-        }
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

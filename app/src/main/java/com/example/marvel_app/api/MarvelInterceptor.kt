@@ -1,7 +1,6 @@
 package com.example.marvel_app.api
 
-import android.content.res.Resources
-import com.example.marvel_app.R
+import com.example.marvel_app.BuildConfig
 import com.example.marvel_app.usecase.GetHashMd5UseCase
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
@@ -13,8 +12,8 @@ class MarvelInterceptor : Interceptor {
         val requestBuilder = chain.request().newBuilder()
 
         val ts = Date().toString()
-        val publicKey = Resources.getSystem().getString(R.string.public_api_key)
-        val privateKey = Resources.getSystem().getString(R.string.private_api_key)
+        val publicKey = BuildConfig.marvel_api_key_public
+        val privateKey = BuildConfig.marvel_api_key_private
         var hash : String? = null
 
         runBlocking {
