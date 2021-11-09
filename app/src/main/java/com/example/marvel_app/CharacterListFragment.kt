@@ -1,59 +1,70 @@
 package com.example.marvel_app
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.marvel_app.adapter.CharacterAdapter
+import com.example.marvel_app.model.JsonResponse
+import com.example.marvel_app.model.MarvelCharacter
+import com.example.marvel_app.usecase.GetMarvelCharacterUseCase
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CharacterListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CharacterListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val scope = CoroutineScope(Dispatchers.IO)
+
+    private var characterList: List<MarvelCharacter> = ArrayList()
+
+    private var characterAdapter: CharacterAdapter? = null
+
+    private var characterOffset = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_character_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_character_list, container, false)
+
+        val recyclerView: RecyclerView = view.findViewById(R.id.characterList)
+
+        characterAdapter =  CharacterAdapter(requireContext(), characterList)
+
+        recyclerView.layoutManager =
+            LinearLayoutManager(requireContext())
+        recyclerView.adapter = characterAdapter
+
+        callCharacters()
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CharacterListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CharacterListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun callCharacters() {
+        scope.launch {
+            val jsonResponse = Gson().fromJson<JsonResponse<MarvelCharacter>>(
+                Gson().toJson(GetMarvelCharacterUseCase(characterOffset).execute().getOrNull()),
+                object : TypeToken<JsonResponse<MarvelCharacter>>() {}.type
+            )
+            Log.d("Main", "onCreate: $jsonResponse")
+
+            characterOffset = jsonResponse.data.offset + jsonResponse.data.count
+            characterList = jsonResponse.data.results
+
+            activity?.runOnUiThread {
+                characterAdapter?.updateValue(jsonResponse.data.results)
             }
+
+            Log.d("Main", "callCharacters: $characterList")
+        }
     }
+
 }

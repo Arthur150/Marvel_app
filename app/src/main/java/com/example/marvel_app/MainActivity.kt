@@ -1,34 +1,14 @@
 package com.example.marvel_app
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.marvel_app.adapter.CharacterAdapter
-import com.example.marvel_app.model.JsonResponse
-import com.example.marvel_app.model.MarvelCharacter
-import com.example.marvel_app.usecase.GetMarvelCharacterUseCase
+import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    private val scope = CoroutineScope(Dispatchers.IO)
-
     private var bottomNavigationView: BottomNavigationView? = null
-    private var recyclerView: RecyclerView? = null
-
-    private var characterList: List<MarvelCharacter> = ArrayList()
-
-    private var characterAdapter: CharacterAdapter = CharacterAdapter(this, characterList)
-
-    private var characterOffset = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,14 +17,6 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView = findViewById(R.id.bottomNavBar)
         initNav()
 
-        recyclerView = findViewById(R.id.characterList)
-        recyclerView?.let {
-            it.layoutManager = LinearLayoutManager(this)
-            it.adapter = characterAdapter
-        }
-
-
-        callCharacters()
 
     }
 
@@ -54,17 +26,10 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView?.selectedItemId = R.id.characters
     }
 
-    private fun callCharacters(){
-        scope.launch {
-            val jsonResponse = Gson().fromJson<JsonResponse<MarvelCharacter>>(
-                Gson().toJson(GetMarvelCharacterUseCase(characterOffset).execute().getOrNull()),
-                object : TypeToken<JsonResponse<MarvelCharacter>>() {}.type
-            )
-            Log.d("Main", "onCreate: $jsonResponse")
-
-            characterOffset = jsonResponse.data.offset + jsonResponse.data.count
-            characterList = jsonResponse.data.results
-            characterAdapter.notifyDataSetChanged()
-        }
+    private fun showFragment(fragment: Fragment) {
+        val fragmentManager = supportFragmentManager.beginTransaction()
+        fragmentManager.replace(R.id.fragmentContainerView, fragment)
+        fragmentManager.commit()
     }
+
 }

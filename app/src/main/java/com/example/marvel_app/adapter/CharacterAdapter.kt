@@ -10,9 +10,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvel_app.R
 import com.example.marvel_app.model.MarvelCharacter
+import com.jakewharton.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 
-class CharacterAdapter(private val context: Context, private val characterList: List<MarvelCharacter>) :
+class CharacterAdapter(private val context: Context, private var characterList: List<MarvelCharacter>) :
     RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -34,10 +35,18 @@ class CharacterAdapter(private val context: Context, private val characterList: 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.name.text = characterList[position].name
 
-        Picasso.with(context)
-            .load(characterList[position].thumbnail.path + characterList[position].thumbnail.extension)
+        val builder = Picasso.Builder(context)
+        builder.downloader(OkHttp3Downloader(context))
+        builder.build().load("${characterList[position].thumbnail.path}.${characterList[position].thumbnail.extension}")
+            .placeholder(R.drawable.ic_iron_man)
+            .error(R.drawable.ic_captain_america)
             .into(holder.image)
     }
 
     override fun getItemCount() = characterList.size
+
+    fun updateValue(list : List<MarvelCharacter>) {
+        characterList = list
+        notifyDataSetChanged()
+    }
 }
