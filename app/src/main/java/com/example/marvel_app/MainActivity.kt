@@ -24,6 +24,21 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView?.itemIconTintList = null
         bottomNavigationView?.labelVisibilityMode = NavigationBarView.LABEL_VISIBILITY_SELECTED
         bottomNavigationView?.selectedItemId = R.id.characters
+        bottomNavigationView?.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.series -> {
+                    showFragment(SeriesFragment())
+                    true
+                }
+                R.id.characters -> {
+                    showFragment(CharacterListFragment())
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+        }
     }
 
     private fun showFragment(fragment: Fragment) {
