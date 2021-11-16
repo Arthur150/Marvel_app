@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.24895833333333334" />
+        <entry key="app/src/main/res/drawable/ic_captain_america.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24583333333333332" />
         <entry key="app/src/main/res/layout/character_item.xml" value="0.23385416666666667" />
         <entry key="app/src/main/res/layout/fragment_character_list.xml" value="0.21979166666666666" />
