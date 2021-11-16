@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.example.marvel_app.adapter.CharacterAdapter
-import com.example.marvel_app.model.CharacterViewModel
+import com.example.marvel_app.model.MarvelCharacter.CharacterViewModel
 
 class CharacterListFragment : Fragment() {
 

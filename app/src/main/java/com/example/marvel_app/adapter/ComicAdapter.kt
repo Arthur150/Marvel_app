@@ -8,45 +8,45 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvel_app.R
-import com.example.marvel_app.model.MarvelSerie.MarvelSerie
+import com.example.marvel_app.model.MarvelComic.MarvelComic
 import com.squareup.picasso.Picasso
 
-class SerieAdapter(
+class ComicAdapter (
     private val context: Context,
-    private var series: List<MarvelSerie>
+    private var comics: List<MarvelComic>
 ) :
-    RecyclerView.Adapter<SerieAdapter.ViewHolder>() {
+    RecyclerView.Adapter<ComicAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val image: ImageView
         val title: TextView
 
         init {
-            image = view.findViewById(R.id.serieItemImage)
-            title = view.findViewById(R.id.serieItemTitle)
+            image = view.findViewById(R.id.comicItemImage)
+            title = view.findViewById(R.id.comicItemTitle)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
-            LayoutInflater.from(context).inflate(R.layout.serie_item, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.comic_item, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.title.text = series[position].title
+        holder.title.text = comics[position].title
 
         Picasso.with(context)
-            .load("${series[position].thumbnail.path}.${series[position].thumbnail.extension}")
-            .placeholder(R.drawable.ic_avengers)
-            .error(R.drawable.ic_avengers)
+            .load("${comics[position].thumbnail.path}.${comics[position].thumbnail.extension}")
+            .placeholder(R.drawable.ic_captain_america)
+            .error(R.drawable.ic_captain_america)
             .into(holder.image)
     }
 
-    override fun getItemCount() = series.size
+    override fun getItemCount() = comics.size
 
-    fun updateValue(list: List<MarvelSerie>) {
-        series = list
+    fun updateValue(list: List<MarvelComic>) {
+        comics = list
         notifyDataSetChanged()
     }
 }

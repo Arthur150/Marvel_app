@@ -6,5 +6,6 @@ data class Sample(
     @SerializedName("available") val available: Int,
     @SerializedName("collectionURI") val collectionURI: String,
     @SerializedName("items") val items: List<Item>,
-    @SerializedName("returned") val returned: Int?
+    @SerializedName("returned") val returned: Int?,
+    @SerializedName("role") val role: String?,
 )
