@@ -1,34 +1,35 @@
 package com.example.marvel_app
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.example.marvel_app.model.JsonResponse
-import com.example.marvel_app.model.MarvelCharacter
-import com.example.marvel_app.usecase.GetMarvelCharacterUseCase
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlin.math.log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {
 
-    private val scope = CoroutineScope(Dispatchers.IO)
+    private var bottomNavigationView: BottomNavigationView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        scope.launch {
-            val jsonResponse = Gson().fromJson<JsonResponse<MarvelCharacter>>(
-                Gson().toJson(GetMarvelCharacterUseCase(0).execute().getOrNull()),
-                object : TypeToken<JsonResponse<MarvelCharacter>>() {}.type
-            )
-            Log.d("Main", "onCreate: $jsonResponse")
+        bottomNavigationView = findViewById(R.id.bottomNavBar)
+        initNav()
 
-        }
+
     }
+
+    private fun initNav() {
+        bottomNavigationView?.itemIconTintList = null
+        bottomNavigationView?.labelVisibilityMode = NavigationBarView.LABEL_VISIBILITY_SELECTED
+        bottomNavigationView?.selectedItemId = R.id.characters
+    }
+
+    private fun showFragment(fragment: Fragment) {
+        val fragmentManager = supportFragmentManager.beginTransaction()
+        fragmentManager.replace(R.id.fragmentContainerView, fragment)
+        fragmentManager.commit()
+    }
+
 }

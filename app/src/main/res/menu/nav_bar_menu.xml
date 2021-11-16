@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/series"
+        android:icon="@drawable/ic_avengers"
+        android:title="@string/series" />
+
+    <item
+        android:id="@+id/characters"
+        android:icon="@drawable/ic_iron_man"
+        android:title="@string/characters" />
+
+    <item
+        android:id="@+id/comics"
+        android:icon="@drawable/ic_captain_america"
+        android:title="@string/comics" />
+
+</menu>
