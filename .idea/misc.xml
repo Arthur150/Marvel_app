@@ -9,6 +9,8 @@
         <entry key="app/src/main/res/layout/character_item.xml" value="0.23385416666666667" />
         <entry key="app/src/main/res/layout/fragment_character_list.xml" value="0.21979166666666666" />
         <entry key="app/src/main/res/layout/fragment_marvel_character_list.xml" value="0.24583333333333332" />
+        <entry key="app/src/main/res/layout/fragment_series.xml" value="0.29030797101449274" />
+        <entry key="app/src/main/res/layout/serie_item.xml" value="0.29030797101449274" />
         <entry key="app/src/main/res/menu/nav_bar_menu.xml" value="0.23697916666666666" />
       </map>
     </option>
