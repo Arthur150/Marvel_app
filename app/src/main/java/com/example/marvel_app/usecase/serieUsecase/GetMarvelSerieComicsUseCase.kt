@@ -13,7 +13,7 @@ class GetMarvelSerieComicsUseCase(private val serieId: Int, private val offset: 
             val response: Response<JsonResponse<MarvelComic>> = ApiClient.service.getSerieComics(serieId,offset)
 
             if (response.isSuccessful) {
-                Log.d("api", "execute: comics")
+                Log.d("api", "execute: serieComics")
                 Result.success(response.body())
             } else throw IllegalStateException("${response.code()}")
 

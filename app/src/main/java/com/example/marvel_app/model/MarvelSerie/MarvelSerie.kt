@@ -5,6 +5,7 @@ import com.example.marvel_app.model.Sample
 import com.example.marvel_app.model.Thumbnail
 import com.example.marvel_app.model.Url
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class MarvelSerie(
     @SerializedName("id") val id: Int,
@@ -24,4 +25,4 @@ data class MarvelSerie(
     @SerializedName("creators") val creators: Sample,
     @SerializedName("next") val next: Item,
     @SerializedName("previous") val previous: Item,
-)
+) : Serializable
