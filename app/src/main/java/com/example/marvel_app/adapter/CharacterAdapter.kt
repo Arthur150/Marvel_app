@@ -1,12 +1,14 @@
 package com.example.marvel_app.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.marvel_app.CharacterDetailActivity
 import com.example.marvel_app.R
 import com.example.marvel_app.model.MarvelCharacter.MarvelCharacter
 import com.squareup.picasso.Picasso
@@ -41,6 +43,15 @@ class CharacterAdapter(
             .placeholder(R.drawable.ic_iron_man)
             .error(R.drawable.ic_iron_man)
             .into(holder.image)
+
+        holder.itemView.setOnClickListener {
+
+            val intent = Intent(context, CharacterDetailActivity::class.java).apply {
+                putExtra("MarvelCharacter", characterList[position])
+            }
+
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount() = characterList.size

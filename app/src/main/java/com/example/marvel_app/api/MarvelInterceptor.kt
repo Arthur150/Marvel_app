@@ -14,7 +14,7 @@ class MarvelInterceptor : Interceptor {
         val ts = Date().toString()
         val publicKey = BuildConfig.marvel_api_key_public
         val privateKey = BuildConfig.marvel_api_key_private
-        var hash : String? = null
+        var hash : String?
 
         runBlocking {
             val result = GetHashMd5UseCase(ts + privateKey + publicKey).execute()

@@ -1,9 +1,10 @@
-package com.example.marvel_app.usecase
+package com.example.marvel_app.usecase.characterUsecase
 
 import android.util.Log
 import com.example.marvel_app.api.ApiClient
 import com.example.marvel_app.model.JsonResponse
 import com.example.marvel_app.model.MarvelCharacter.MarvelCharacter
+import com.example.marvel_app.usecase.UseCase
 import retrofit2.Response
 
 class GetMarvelCharacterUseCase(private val offset: Int) : UseCase<JsonResponse<MarvelCharacter>?> {
