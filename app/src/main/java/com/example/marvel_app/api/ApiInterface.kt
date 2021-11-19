@@ -6,6 +6,7 @@ import com.example.marvel_app.model.MarvelComic.MarvelComic
 import com.example.marvel_app.model.MarvelSerie.MarvelSerie
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiInterface {
@@ -23,4 +24,16 @@ interface ApiInterface {
     suspend fun getComics(
         @Query("offset") offset: Int
     ): Response<JsonResponse<MarvelComic>>
+
+    @GET("/v1/public/characters/{id}/comics")
+    suspend fun getCharacterComics(
+        @Path("id") characterId: Int,
+        @Query("offset") offset: Int
+    ): Response<JsonResponse<MarvelComic>>
+
+    @GET("/v1/public/characters/{id}/series")
+    suspend fun getCharacterSeries(
+        @Path("id") characterId: Int,
+        @Query("offset") offset: Int
+    ): Response<JsonResponse<MarvelSerie>>
 }
