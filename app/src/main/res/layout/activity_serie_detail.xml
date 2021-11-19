@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CharacterDetailActivity">
+    tools:context=".SerieDetailActivity">
 
     <TextView
-        android:id="@+id/characterDetailName"
+        android:id="@+id/serieDetailTitle"
         android:layout_width="224dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="@string/name"
-        app:layout_constraintEnd_toEndOf="@+id/characterDetailImage"
-        app:layout_constraintStart_toStartOf="@+id/characterDetailImage"
-        app:layout_constraintTop_toBottomOf="@+id/characterDetailImage" />
+        android:text="@string/title"
+        app:layout_constraintEnd_toEndOf="@+id/serieDetailImage"
+        app:layout_constraintStart_toStartOf="@+id/serieDetailImage"
+        app:layout_constraintTop_toBottomOf="@+id/serieDetailImage" />
 
     <ImageView
-        android:id="@+id/characterDetailImage"
+        android:id="@+id/serieDetailImage"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="28dp"
@@ -30,41 +30,41 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/characterDetailDescription"
+        android:id="@+id/serieDetailDescription"
         android:layout_width="342dp"
         android:layout_height="32dp"
         android:layout_marginTop="24dp"
         android:gravity="fill"
         android:text="@string/description"
-        app:layout_constraintEnd_toEndOf="@+id/characterDetailName"
-        app:layout_constraintStart_toStartOf="@+id/characterDetailName"
-        app:layout_constraintTop_toBottomOf="@+id/characterDetailName" />
+        app:layout_constraintEnd_toEndOf="@+id/serieDetailTitle"
+        app:layout_constraintStart_toStartOf="@+id/serieDetailTitle"
+        app:layout_constraintTop_toBottomOf="@+id/serieDetailTitle" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/characterDetailRecyclerView"
+        android:id="@+id/serieDetailRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/characterDetailButtonSwitchList"
+        app:layout_constraintEnd_toEndOf="@+id/serieDetailButtonSwitchList"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/characterDetailButtonSwitchList"
-        app:layout_constraintTop_toBottomOf="@+id/characterDetailButtonSwitchList"
+        app:layout_constraintStart_toStartOf="@+id/serieDetailButtonSwitchList"
+        app:layout_constraintTop_toBottomOf="@+id/serieDetailButtonSwitchList"
         app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/comic_item" />
 
     <Button
-        android:id="@+id/characterDetailButtonSwitchList"
+        android:id="@+id/serieDetailButtonSwitchList"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/marvel_blue"
-        android:text="@string/comics"
+        android:text="@string/characters"
         android:textColor="@color/marvel_red"
-        app:layout_constraintEnd_toEndOf="@+id/characterDetailDescription"
+        app:layout_constraintEnd_toEndOf="@+id/serieDetailDescription"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/characterDetailDescription"
-        app:layout_constraintTop_toBottomOf="@+id/characterDetailDescription" />
+        app:layout_constraintStart_toStartOf="@+id/serieDetailDescription"
+        app:layout_constraintTop_toBottomOf="@+id/serieDetailDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

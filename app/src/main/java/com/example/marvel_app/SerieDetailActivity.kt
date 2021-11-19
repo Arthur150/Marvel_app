@@ -7,52 +7,53 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.marvel_app.adapter.CharacterAdapter
 import com.example.marvel_app.adapter.ComicAdapter
 import com.example.marvel_app.adapter.SerieAdapter
-import com.example.marvel_app.model.MarvelCharacter.CharacterDetailViewModel
-import com.example.marvel_app.model.MarvelCharacter.MarvelCharacter
+import com.example.marvel_app.model.MarvelSerie.MarvelSerie
+import com.example.marvel_app.model.MarvelSerie.SerieDetailViewModel
 import com.squareup.picasso.Picasso
 
-class CharacterDetailActivity : AppCompatActivity() {
+class SerieDetailActivity : AppCompatActivity() {
 
     private var comicAdapter: ComicAdapter? = null
 
-    private var serieAdapter: SerieAdapter? = null
+    private var characterAdapter: CharacterAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_character_detail)
+        setContentView(R.layout.activity_serie_detail)
 
-        val model = CharacterDetailViewModel(intent.getSerializableExtra("MarvelCharacter") as MarvelCharacter)
+        val model = SerieDetailViewModel(intent.getSerializableExtra("MarvelSerie") as MarvelSerie)
 
-        val imageView = findViewById<ImageView>(R.id.characterDetailImage)
-        val nameView = findViewById<TextView>(R.id.characterDetailName)
-        val descriptionView = findViewById<TextView>(R.id.characterDetailDescription)
-        val recyclerView = findViewById<RecyclerView>(R.id.characterDetailRecyclerView)
-        val button = findViewById<Button>(R.id.characterDetailButtonSwitchList)
+        val imageView = findViewById<ImageView>(R.id.serieDetailImage)
+        val titleView = findViewById<TextView>(R.id.serieDetailTitle)
+        val descriptionView = findViewById<TextView>(R.id.serieDetailDescription)
+        val recyclerView = findViewById<RecyclerView>(R.id.serieDetailRecyclerView)
+        val button = findViewById<Button>(R.id.serieDetailButtonSwitchList)
 
         Picasso.with(this)
-            .load("${model.character.thumbnail.path}.${model.character.thumbnail.extension}")
+            .load("${model.serie.thumbnail.path}.${model.serie.thumbnail.extension}")
             .placeholder(R.drawable.ic_iron_man)
             .error(R.drawable.ic_iron_man)
             .into(imageView)
 
-        nameView.text = model.character.name
-        descriptionView.text = model.character.description
+        titleView.text = model.serie.title
+        descriptionView.text = model.serie.description
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         comicAdapter = ComicAdapter(this, emptyList())
-        serieAdapter = SerieAdapter(this, emptyList())
-        recyclerView.adapter = comicAdapter
+        characterAdapter = CharacterAdapter(this, emptyList())
+        recyclerView.adapter = characterAdapter
 
         model.getComics()
             .observe(this, { comics ->
                 comicAdapter?.updateValue(comics)
             })
 
-        model.getSeries()
+        model.getCharacters()
             .observe(this, { series ->
-                serieAdapter?.updateValue(series)
+                characterAdapter?.updateValue(series)
             })
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -63,8 +64,8 @@ class CharacterDetailActivity : AppCompatActivity() {
                     if (recyclerView.adapter?.javaClass == ComicAdapter::class.java) {
                         model.loadComics()
                     }
-                    else if (recyclerView.adapter?.javaClass == SerieAdapter::class.java){
-                        model.loadSeries()
+                    else if (recyclerView.adapter?.javaClass == CharacterAdapter::class.java){
+                        model.loadCharacters()
                     }
                 }
             }
@@ -72,22 +73,17 @@ class CharacterDetailActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             if (recyclerView.adapter?.javaClass == ComicAdapter::class.java) {
-                recyclerView.adapter = serieAdapter
-                button.setBackgroundColor(getColor(R.color.marvel_red))
-                button.setTextColor(getColor(R.color.marvel_blue))
-                button.setText(R.string.series)
-            }
-            else if (recyclerView.adapter?.javaClass == SerieAdapter::class.java){
-                recyclerView.adapter = comicAdapter
+                recyclerView.adapter = characterAdapter
                 button.setBackgroundColor(getColor(R.color.marvel_blue))
                 button.setTextColor(getColor(R.color.marvel_red))
                 button.setText(R.string.comics)
             }
+            else if (recyclerView.adapter?.javaClass == CharacterAdapter::class.java){
+                recyclerView.adapter = comicAdapter
+                button.setBackgroundColor(getColor(R.color.marvel_red))
+                button.setTextColor(getColor(R.color.marvel_blue))
+                button.setText(R.string.series)
+            }
         }
-
-
-
     }
-
-
 }
