@@ -1,7 +1,6 @@
 package com.example.marvel_app.adapter
 
 import android.content.Context
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvel_app.R
-import com.example.marvel_app.model.MarvelCharacter
-import com.jakewharton.picasso.OkHttp3Downloader
+import com.example.marvel_app.model.MarvelCharacter.MarvelCharacter
 import com.squareup.picasso.Picasso
 
 class CharacterAdapter(
@@ -41,7 +39,7 @@ class CharacterAdapter(
         Picasso.with(context)
             .load("${characterList[position].thumbnail.path}.${characterList[position].thumbnail.extension}")
             .placeholder(R.drawable.ic_iron_man)
-            .error(R.drawable.ic_captain_america)
+            .error(R.drawable.ic_iron_man)
             .into(holder.image)
     }
 

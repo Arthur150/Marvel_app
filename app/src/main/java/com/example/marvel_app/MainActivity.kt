@@ -34,6 +34,10 @@ class MainActivity : AppCompatActivity() {
                     showFragment(CharacterListFragment())
                     true
                 }
+                R.id.comics -> {
+                    showFragment(ComicsFragment())
+                    true
+                }
                 else -> {
                     false
                 }

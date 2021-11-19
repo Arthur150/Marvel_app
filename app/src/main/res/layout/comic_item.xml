@@ -6,11 +6,11 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/characterItemImage"
+        android:id="@+id/comicItemImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_margin="10dp"
-        android:contentDescription="@string/character_avatar"
+        android:contentDescription="@string/comic_picture"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -18,14 +18,15 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/characterItemName"
+        android:id="@+id/comicItemTitle"
         android:layout_width="159dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="48dp"
-        android:text="@string/name"
+        android:text="@string/title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.71"
-        app:layout_constraintStart_toEndOf="@+id/characterItemImage"
+        app:layout_constraintStart_toEndOf="@+id/comicItemImage"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

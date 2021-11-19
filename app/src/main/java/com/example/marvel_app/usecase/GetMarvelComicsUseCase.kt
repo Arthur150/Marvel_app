@@ -3,16 +3,16 @@ package com.example.marvel_app.usecase
 import android.util.Log
 import com.example.marvel_app.api.ApiClient
 import com.example.marvel_app.model.JsonResponse
-import com.example.marvel_app.model.MarvelSerie.MarvelSerie
+import com.example.marvel_app.model.MarvelComic.MarvelComic
 import retrofit2.Response
 
-class GetMarvelSeriesUseCase(private val offset: Int) : UseCase<JsonResponse<MarvelSerie>?> {
-    override suspend fun execute(): Result<JsonResponse<MarvelSerie>?> {
+class GetMarvelComicsUseCase(private val offset: Int) : UseCase<JsonResponse<MarvelComic>?> {
+    override suspend fun execute(): Result<JsonResponse<MarvelComic>?> {
         return try {
-            val response: Response<JsonResponse<MarvelSerie>> = ApiClient.service.getSeries(offset)
+            val response: Response<JsonResponse<MarvelComic>> = ApiClient.service.getComics(offset)
 
             if (response.isSuccessful) {
-                Log.d("api", "execute: series")
+                Log.d("api", "execute: comics")
                 Result.success(response.body())
             } else throw IllegalStateException("${response.code()}")
 

@@ -1,5 +1,7 @@
-package com.example.marvel_app.model
+package com.example.marvel_app.model.MarvelCharacter
 
+import com.example.marvel_app.model.Sample
+import com.example.marvel_app.model.Thumbnail
 import com.google.gson.annotations.SerializedName
 
 data class MarvelCharacter (
