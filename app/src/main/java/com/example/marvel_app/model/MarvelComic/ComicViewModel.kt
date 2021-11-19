@@ -44,5 +44,5 @@ class ComicViewModel : ViewModel() {
 
             comics.postValue(tempList)
         }
-    } 
+    }
 }

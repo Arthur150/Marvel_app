@@ -11,7 +11,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.launch
 
-class SerieViewModel: ViewModel() {
+class SerieViewModel : ViewModel() {
     private val series: MutableLiveData<List<MarvelSerie>> by lazy {
         MutableLiveData<List<MarvelSerie>>().also {
             loadSeries()

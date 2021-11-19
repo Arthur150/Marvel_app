@@ -14,7 +14,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.launch
 
-class CharacterDetailViewModel (val character: MarvelCharacter) : ViewModel() {
+class CharacterDetailViewModel(val character: MarvelCharacter) : ViewModel() {
 
     private val comics: MutableLiveData<List<MarvelComic>> by lazy {
         MutableLiveData<List<MarvelComic>>().also {
@@ -47,7 +47,10 @@ class CharacterDetailViewModel (val character: MarvelCharacter) : ViewModel() {
     fun loadComics() {
         viewModelScope.launch {
             val jsonResponse = Gson().fromJson<JsonResponse<MarvelComic>>(
-                Gson().toJson(GetMarvelCharacterComicsUseCase(character.id, offsetComics).execute().getOrNull()),
+                Gson().toJson(
+                    GetMarvelCharacterComicsUseCase(character.id, offsetComics).execute()
+                        .getOrNull()
+                ),
                 object : TypeToken<JsonResponse<MarvelComic>>() {}.type
             )
             Log.d("ViewModel", "loadComics: $jsonResponse")
@@ -67,7 +70,10 @@ class CharacterDetailViewModel (val character: MarvelCharacter) : ViewModel() {
     fun loadSeries() {
         viewModelScope.launch {
             val jsonResponse = Gson().fromJson<JsonResponse<MarvelSerie>>(
-                Gson().toJson(GetMarvelCharacterSeriesUseCase(character.id, offsetSeries).execute().getOrNull()),
+                Gson().toJson(
+                    GetMarvelCharacterSeriesUseCase(character.id, offsetSeries).execute()
+                        .getOrNull()
+                ),
                 object : TypeToken<JsonResponse<MarvelSerie>>() {}.type
             )
             Log.d("ViewModel", "loadSeries: $jsonResponse")

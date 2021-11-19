@@ -21,13 +21,9 @@ class SerieAdapter(
     RecyclerView.Adapter<SerieAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val image: ImageView
-        val title: TextView
+        val image: ImageView = view.findViewById(R.id.serieItemImage)
+        val title: TextView = view.findViewById(R.id.serieItemTitle)
 
-        init {
-            image = view.findViewById(R.id.serieItemImage)
-            title = view.findViewById(R.id.serieItemTitle)
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

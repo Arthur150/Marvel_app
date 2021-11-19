@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ComicDetailActivity">
+
+    <TextView
+        android:id="@+id/comicDetailTitle"
+        android:layout_width="224dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/title"
+        app:layout_constraintEnd_toEndOf="@+id/comicDetailImage"
+        app:layout_constraintStart_toStartOf="@+id/comicDetailImage"
+        app:layout_constraintTop_toBottomOf="@+id/comicDetailImage" />
+
+    <ImageView
+        android:id="@+id/comicDetailImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="28dp"
+        android:contentDescription="@string/comic_picture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ImageContrastCheck"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/comicDetailDescription"
+        android:layout_width="342dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="24dp"
+        android:gravity="fill"
+        android:text="@string/description"
+        app:layout_constraintEnd_toEndOf="@+id/comicDetailTitle"
+        app:layout_constraintStart_toStartOf="@+id/comicDetailTitle"
+        app:layout_constraintTop_toBottomOf="@+id/comicDetailTitle" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/comicDetailRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/comicDetailButtonSwitchList"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/comicDetailButtonSwitchList"
+        app:layout_constraintTop_toBottomOf="@+id/comicDetailButtonSwitchList"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/comic_item" />
+
+    <Button
+        android:id="@+id/comicDetailButtonSwitchList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/marvel_blue"
+        android:text="@string/characters"
+        android:textColor="@color/marvel_red"
+        app:layout_constraintEnd_toEndOf="@+id/comicDetailDescription"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/comicDetailDescription"
+        app:layout_constraintTop_toBottomOf="@+id/comicDetailDescription" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/comicDetailSerieItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/comicDetailButtonSwitchList"
+        app:layout_constraintStart_toStartOf="@+id/comicDetailButtonSwitchList"
+        app:layout_constraintTop_toBottomOf="@+id/comicDetailButtonSwitchList">
+
+        <ImageView
+            android:id="@+id/ComicDetailSerieItemImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/serie_picture"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="ImageContrastCheck"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/ComicDetailSerieItemTitle"
+            android:layout_width="159dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="48dp"
+            android:gravity="center"
+            android:text="@string/title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.71"
+            app:layout_constraintStart_toEndOf="@+id/ComicDetailSerieItemImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

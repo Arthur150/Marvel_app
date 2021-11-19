@@ -14,7 +14,7 @@ class MarvelInterceptor : Interceptor {
         val ts = Date().toString()
         val publicKey = BuildConfig.marvel_api_key_public
         val privateKey = BuildConfig.marvel_api_key_private
-        var hash : String?
+        var hash: String?
 
         runBlocking {
             val result = GetHashMd5UseCase(ts + privateKey + publicKey).execute()
@@ -24,10 +24,10 @@ class MarvelInterceptor : Interceptor {
 
         requestBuilder.url(
             chain.request().url.newBuilder()
-            .addQueryParameter("ts", ts)
-            .addQueryParameter("apikey", publicKey)
-            .addQueryParameter("hash", hash)
-            .toString()
+                .addQueryParameter("ts", ts)
+                .addQueryParameter("apikey", publicKey)
+                .addQueryParameter("hash", hash)
+                .toString()
         )
 
         return chain.proceed(requestBuilder.build())

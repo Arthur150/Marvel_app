@@ -7,10 +7,12 @@ import com.example.marvel_app.model.MarvelComic.MarvelComic
 import com.example.marvel_app.usecase.UseCase
 import retrofit2.Response
 
-class GetMarvelSerieComicsUseCase(private val serieId: Int, private val offset: Int) : UseCase<JsonResponse<MarvelComic>?> {
+class GetMarvelSerieComicsUseCase(private val serieId: Int, private val offset: Int) :
+    UseCase<JsonResponse<MarvelComic>?> {
     override suspend fun execute(): Result<JsonResponse<MarvelComic>?> {
         return try {
-            val response: Response<JsonResponse<MarvelComic>> = ApiClient.service.getSerieComics(serieId,offset)
+            val response: Response<JsonResponse<MarvelComic>> =
+                ApiClient.service.getSerieComics(serieId, offset)
 
             if (response.isSuccessful) {
                 Log.d("api", "execute: serieComics")

@@ -1,15 +1,14 @@
 package com.example.marvel_app
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvel_app.adapter.CharacterAdapter
 import com.example.marvel_app.adapter.ComicAdapter
-import com.example.marvel_app.adapter.SerieAdapter
 import com.example.marvel_app.model.MarvelSerie.MarvelSerie
 import com.example.marvel_app.model.MarvelSerie.SerieDetailViewModel
 import com.squareup.picasso.Picasso
@@ -34,8 +33,8 @@ class SerieDetailActivity : AppCompatActivity() {
 
         Picasso.with(this)
             .load("${model.serie.thumbnail.path}.${model.serie.thumbnail.extension}")
-            .placeholder(R.drawable.ic_iron_man)
-            .error(R.drawable.ic_iron_man)
+            .placeholder(R.drawable.ic_avengers)
+            .error(R.drawable.ic_avengers)
             .into(imageView)
 
         titleView.text = model.serie.title
@@ -52,8 +51,8 @@ class SerieDetailActivity : AppCompatActivity() {
             })
 
         model.getCharacters()
-            .observe(this, { series ->
-                characterAdapter?.updateValue(series)
+            .observe(this, { characters ->
+                characterAdapter?.updateValue(characters)
             })
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -63,8 +62,7 @@ class SerieDetailActivity : AppCompatActivity() {
                 if (!recyclerView.canScrollVertically(1)) {
                     if (recyclerView.adapter?.javaClass == ComicAdapter::class.java) {
                         model.loadComics()
-                    }
-                    else if (recyclerView.adapter?.javaClass == CharacterAdapter::class.java){
+                    } else if (recyclerView.adapter?.javaClass == CharacterAdapter::class.java) {
                         model.loadCharacters()
                     }
                 }
@@ -72,17 +70,19 @@ class SerieDetailActivity : AppCompatActivity() {
         })
 
         button.setOnClickListener {
-            if (recyclerView.adapter?.javaClass == ComicAdapter::class.java) {
-                recyclerView.adapter = characterAdapter
-                button.setBackgroundColor(getColor(R.color.marvel_blue))
-                button.setTextColor(getColor(R.color.marvel_red))
-                button.setText(R.string.comics)
-            }
-            else if (recyclerView.adapter?.javaClass == CharacterAdapter::class.java){
-                recyclerView.adapter = comicAdapter
-                button.setBackgroundColor(getColor(R.color.marvel_red))
-                button.setTextColor(getColor(R.color.marvel_blue))
-                button.setText(R.string.series)
+            when (recyclerView.adapter?.javaClass) {
+                ComicAdapter::class.java -> {
+                    recyclerView.adapter = characterAdapter
+                    button.setBackgroundColor(getColor(R.color.marvel_blue))
+                    button.setTextColor(getColor(R.color.marvel_red))
+                    button.setText(R.string.comics)
+                }
+                CharacterAdapter::class.java -> {
+                    recyclerView.adapter = comicAdapter
+                    button.setBackgroundColor(getColor(R.color.marvel_red))
+                    button.setTextColor(getColor(R.color.marvel_blue))
+                    button.setText(R.string.comics)
+                }
             }
         }
     }

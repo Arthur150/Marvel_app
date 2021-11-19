@@ -21,7 +21,6 @@ class CharacterListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_character_list, container, false)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.characterList)
