@@ -36,4 +36,16 @@ interface ApiInterface {
         @Path("id") characterId: Int,
         @Query("offset") offset: Int
     ): Response<JsonResponse<MarvelSerie>>
+
+    @GET("/v1/public/series/{id}/comics")
+    suspend fun getSerieComics(
+        @Path("id") serieId: Int,
+        @Query("offset") offset: Int
+    ): Response<JsonResponse<MarvelComic>>
+
+    @GET("/v1/public/series/{id}/characters")
+    suspend fun getSerieCharacters(
+        @Path("id") serieId: Int,
+        @Query("offset") offset: Int
+    ): Response<JsonResponse<MarvelCharacter>>
 }

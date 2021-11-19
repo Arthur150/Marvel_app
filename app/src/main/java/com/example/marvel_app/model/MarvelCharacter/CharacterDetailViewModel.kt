@@ -1,11 +1,11 @@
-package com.example.marvel_app.model
+package com.example.marvel_app.model.MarvelCharacter
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.marvel_app.model.MarvelCharacter.MarvelCharacter
+import com.example.marvel_app.model.JsonResponse
 import com.example.marvel_app.model.MarvelComic.MarvelComic
 import com.example.marvel_app.model.MarvelSerie.MarvelSerie
 import com.example.marvel_app.usecase.characterUsecase.GetMarvelCharacterComicsUseCase

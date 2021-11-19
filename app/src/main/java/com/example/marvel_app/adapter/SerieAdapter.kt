@@ -1,13 +1,16 @@
 package com.example.marvel_app.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.marvel_app.CharacterDetailActivity
 import com.example.marvel_app.R
+import com.example.marvel_app.SerieDetailActivity
 import com.example.marvel_app.model.MarvelSerie.MarvelSerie
 import com.squareup.picasso.Picasso
 
@@ -41,6 +44,15 @@ class SerieAdapter(
             .placeholder(R.drawable.ic_avengers)
             .error(R.drawable.ic_avengers)
             .into(holder.image)
+
+        holder.itemView.setOnClickListener {
+
+            val intent = Intent(context, SerieDetailActivity::class.java).apply {
+                putExtra("MarvelSerie", series[position])
+            }
+
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount() = series.size
