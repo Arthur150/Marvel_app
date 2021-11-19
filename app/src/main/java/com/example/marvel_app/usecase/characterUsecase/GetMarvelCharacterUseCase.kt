@@ -10,7 +10,8 @@ import retrofit2.Response
 class GetMarvelCharacterUseCase(private val offset: Int) : UseCase<JsonResponse<MarvelCharacter>?> {
     override suspend fun execute(): Result<JsonResponse<MarvelCharacter>?> {
         return try {
-            val response: Response<JsonResponse<MarvelCharacter>> = ApiClient.service.getCharacters(offset)
+            val response: Response<JsonResponse<MarvelCharacter>> =
+                ApiClient.service.getCharacters(offset)
 
             if (response.isSuccessful) {
                 Log.d("api", "execute: characters")

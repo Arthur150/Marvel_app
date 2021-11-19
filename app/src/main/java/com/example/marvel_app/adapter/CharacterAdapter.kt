@@ -20,13 +20,9 @@ class CharacterAdapter(
     RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val image: ImageView
-        val name: TextView
+        val image: ImageView = view.findViewById(R.id.characterItemImage)
+        val name: TextView = view.findViewById(R.id.characterItemName)
 
-        init {
-            image = view.findViewById(R.id.characterItemImage)
-            name = view.findViewById(R.id.characterItemName)
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

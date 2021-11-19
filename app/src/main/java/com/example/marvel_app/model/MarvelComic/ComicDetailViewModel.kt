@@ -1,4 +1,4 @@
-package com.example.marvel_app.model.MarvelSerie
+package com.example.marvel_app.model.MarvelComic
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -7,18 +7,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.marvel_app.model.JsonResponse
 import com.example.marvel_app.model.MarvelCharacter.MarvelCharacter
-import com.example.marvel_app.model.MarvelComic.MarvelComic
-import com.example.marvel_app.usecase.serieUsecase.GetMarvelSerieCharactersUseCase
-import com.example.marvel_app.usecase.serieUsecase.GetMarvelSerieComicsUseCase
+import com.example.marvel_app.model.MarvelSerie.MarvelSerie
+import com.example.marvel_app.usecase.comicUsecase.GetMarvelComicCharactersUseCase
+import com.example.marvel_app.usecase.comicUsecase.GetMarvelComicSeriesUseCase
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.launch
 
-class SerieDetailViewModel(val serie: MarvelSerie) : ViewModel() {
+class ComicDetailViewModel(val comic: MarvelComic) : ViewModel() {
 
-    private val comics: MutableLiveData<List<MarvelComic>> by lazy {
-        MutableLiveData<List<MarvelComic>>().also {
-            loadComics()
+    private val serie: MutableLiveData<MarvelSerie> by lazy {
+        MutableLiveData<MarvelSerie>().also {
+            loadSerie()
         }
     }
 
@@ -28,41 +28,29 @@ class SerieDetailViewModel(val serie: MarvelSerie) : ViewModel() {
         }
     }
 
-    private val comicList = ArrayList<MarvelComic>()
-
-    private var offsetComics = 0
-
     private val characterList = ArrayList<MarvelCharacter>()
 
-    private var offset = 0
+    private var offsetCharacter = 0
 
-    fun getComics(): LiveData<List<MarvelComic>> {
-        return comics
+    fun getSerie(): LiveData<MarvelSerie> {
+        return serie
     }
 
     fun getCharacters(): LiveData<List<MarvelCharacter>> {
         return characters
     }
 
-    fun loadComics() {
+    fun loadSerie() {
         viewModelScope.launch {
-            val jsonResponse = Gson().fromJson<JsonResponse<MarvelComic>>(
+            val jsonResponse = Gson().fromJson<JsonResponse<MarvelSerie>>(
                 Gson().toJson(
-                    GetMarvelSerieComicsUseCase(serie.id, offsetComics).execute().getOrNull()
+                    GetMarvelComicSeriesUseCase(comic.series.resourceURI.split('/').last().toInt()).execute().getOrNull()
                 ),
-                object : TypeToken<JsonResponse<MarvelComic>>() {}.type
+                object : TypeToken<JsonResponse<MarvelSerie>>() {}.type
             )
-            Log.d("ViewModel", "loadComics: $jsonResponse")
+            Log.d("ViewModel", "loadSerie: $jsonResponse")
 
-            offsetComics = jsonResponse.data.offset + jsonResponse.data.count
-
-            comicList.addAll(jsonResponse.data.results)
-
-            val tempList = List(comicList.size) {
-                comicList[it]
-            }
-
-            comics.postValue(tempList)
+            serie.postValue(jsonResponse.data.results.first())
         }
     }
 
@@ -70,13 +58,13 @@ class SerieDetailViewModel(val serie: MarvelSerie) : ViewModel() {
         viewModelScope.launch {
             val jsonResponse = Gson().fromJson<JsonResponse<MarvelCharacter>>(
                 Gson().toJson(
-                    GetMarvelSerieCharactersUseCase(serie.id, offset).execute().getOrNull()
+                    GetMarvelComicCharactersUseCase(comic.id, offsetCharacter).execute().getOrNull()
                 ),
                 object : TypeToken<JsonResponse<MarvelCharacter>>() {}.type
             )
             Log.d("ViewModel", "loadCharacters: $jsonResponse")
 
-            offset = jsonResponse.data.offset + jsonResponse.data.count
+            offsetCharacter = jsonResponse.data.offset + jsonResponse.data.count
 
             characterList.addAll(jsonResponse.data.results)
 

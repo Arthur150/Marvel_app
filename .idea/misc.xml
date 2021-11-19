@@ -4,6 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/arthu/Desktop/Travail/IUT_Lyon_1/LP IEM/Android/Marvel_app/app/src/main/res/layout/activity_character_detail.xml" value="0.28940217391304346" />
+        <entry key="..\:/Users/arthu/Desktop/Travail/IUT_Lyon_1/LP IEM/Android/Marvel_app/app/src/main/res/layout/activity_comic_detail.xml" value="0.28940217391304346" />
+        <entry key="..\:/Users/arthu/Desktop/Travail/IUT_Lyon_1/LP IEM/Android/Marvel_app/app/src/main/res/layout/activity_main.xml" value="0.28940217391304346" />
+        <entry key="..\:/Users/arthu/Desktop/Travail/IUT_Lyon_1/LP IEM/Android/Marvel_app/app/src/main/res/layout/activity_serie_detail.xml" value="0.28940217391304346" />
+        <entry key="..\:/Users/arthu/Desktop/Travail/IUT_Lyon_1/LP IEM/Android/Marvel_app/app/src/main/res/layout/character_item.xml" value="0.28940217391304346" />
+        <entry key="..\:/Users/arthu/Desktop/Travail/IUT_Lyon_1/LP IEM/Android/Marvel_app/app/src/main/res/layout/comic_item.xml" value="0.28940217391304346" />
+        <entry key="..\:/Users/arthu/Desktop/Travail/IUT_Lyon_1/LP IEM/Android/Marvel_app/app/src/main/res/layout/fragment_character_list.xml" value="0.28940217391304346" />
+        <entry key="..\:/Users/arthu/Desktop/Travail/IUT_Lyon_1/LP IEM/Android/Marvel_app/app/src/main/res/layout/fragment_comics.xml" value="0.28940217391304346" />
+        <entry key="..\:/Users/arthu/Desktop/Travail/IUT_Lyon_1/LP IEM/Android/Marvel_app/app/src/main/res/layout/fragment_series.xml" value="0.28940217391304346" />
+        <entry key="..\:/Users/arthu/Desktop/Travail/IUT_Lyon_1/LP IEM/Android/Marvel_app/app/src/main/res/layout/serie_item.xml" value="0.28940217391304346" />
         <entry key="app/src/main/res/drawable/ic_captain_america.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/activity_character_detail.xml" value="0.276268115942029" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24583333333333332" />

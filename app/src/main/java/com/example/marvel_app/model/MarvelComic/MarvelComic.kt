@@ -2,6 +2,7 @@ package com.example.marvel_app.model.MarvelComic
 
 import com.example.marvel_app.model.*
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class MarvelComic(
     @SerializedName("id") val id: Int,
@@ -32,4 +33,4 @@ data class MarvelComic(
     @SerializedName("creators") val creators: Sample,
     @SerializedName("stories") val stories: Sample,
     @SerializedName("events") val events: Sample,
-)
+) : Serializable

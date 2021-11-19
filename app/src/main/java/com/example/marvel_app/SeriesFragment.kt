@@ -20,7 +20,6 @@ class SeriesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_series, container, false)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.serieList)

@@ -23,7 +23,8 @@ class CharacterDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_character_detail)
 
-        val model = CharacterDetailViewModel(intent.getSerializableExtra("MarvelCharacter") as MarvelCharacter)
+        val model =
+            CharacterDetailViewModel(intent.getSerializableExtra("MarvelCharacter") as MarvelCharacter)
 
         val imageView = findViewById<ImageView>(R.id.characterDetailImage)
         val nameView = findViewById<TextView>(R.id.characterDetailName)
@@ -62,8 +63,7 @@ class CharacterDetailActivity : AppCompatActivity() {
                 if (!recyclerView.canScrollVertically(1)) {
                     if (recyclerView.adapter?.javaClass == ComicAdapter::class.java) {
                         model.loadComics()
-                    }
-                    else if (recyclerView.adapter?.javaClass == SerieAdapter::class.java){
+                    } else if (recyclerView.adapter?.javaClass == SerieAdapter::class.java) {
                         model.loadSeries()
                     }
                 }
@@ -71,20 +71,21 @@ class CharacterDetailActivity : AppCompatActivity() {
         })
 
         button.setOnClickListener {
-            if (recyclerView.adapter?.javaClass == ComicAdapter::class.java) {
-                recyclerView.adapter = serieAdapter
-                button.setBackgroundColor(getColor(R.color.marvel_red))
-                button.setTextColor(getColor(R.color.marvel_blue))
-                button.setText(R.string.series)
-            }
-            else if (recyclerView.adapter?.javaClass == SerieAdapter::class.java){
-                recyclerView.adapter = comicAdapter
-                button.setBackgroundColor(getColor(R.color.marvel_blue))
-                button.setTextColor(getColor(R.color.marvel_red))
-                button.setText(R.string.comics)
+            when (recyclerView.adapter?.javaClass) {
+                ComicAdapter::class.java -> {
+                    recyclerView.adapter = serieAdapter
+                    button.setBackgroundColor(getColor(R.color.marvel_red))
+                    button.setTextColor(getColor(R.color.marvel_blue))
+                    button.setText(R.string.series)
+                }
+                SerieAdapter::class.java -> {
+                    recyclerView.adapter = comicAdapter
+                    button.setBackgroundColor(getColor(R.color.marvel_blue))
+                    button.setTextColor(getColor(R.color.marvel_red))
+                    button.setText(R.string.comics)
+                }
             }
         }
-
 
 
     }

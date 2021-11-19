@@ -14,9 +14,13 @@
         android:theme="@style/Theme.Marvel_app"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ComicDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".SerieDetailActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".CharacterDetailActivity"
             android:exported="false"

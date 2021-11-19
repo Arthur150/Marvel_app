@@ -11,7 +11,8 @@ class GetMarvelCharacterComicsUseCase(private val characterId: Int, private val 
     UseCase<JsonResponse<MarvelComic>?> {
     override suspend fun execute(): Result<JsonResponse<MarvelComic>?> {
         return try {
-            val response: Response<JsonResponse<MarvelComic>> = ApiClient.service.getCharacterComics(characterId,offset)
+            val response: Response<JsonResponse<MarvelComic>> =
+                ApiClient.service.getCharacterComics(characterId, offset)
 
             if (response.isSuccessful) {
                 Log.d("api", "execute: CharacterComics")
