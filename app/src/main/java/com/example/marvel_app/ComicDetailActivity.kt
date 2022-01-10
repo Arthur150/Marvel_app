@@ -1,9 +1,11 @@
 package com.example.marvel_app
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -34,6 +36,14 @@ class ComicDetailActivity : AppCompatActivity() {
         val serieItem = findViewById<ConstraintLayout>(R.id.comicDetailSerieItem)
         val imageSerie = serieItem.findViewById<ImageView>(R.id.ComicDetailSerieItemImage)
         val titleSerie = serieItem.findViewById<TextView>(R.id.ComicDetailSerieItemTitle)
+        val favoriteButton = findViewById<ImageButton>(R.id.comicDetailFavorite)
+
+        val id = getSharedPreferences(getString(R.string.favoriteComics), Context.MODE_PRIVATE)
+            .getInt(model.comic.title,-1)
+
+        if (id == model.comic.id){
+            favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star))
+        }
 
         val serie = model.loadSerie()
 
@@ -101,6 +111,23 @@ class ComicDetailActivity : AppCompatActivity() {
                 button.setBackgroundColor(getColor(R.color.marvel_red))
                 button.setTextColor(getColor(R.color.marvel_blue))
                 button.setText(R.string.series)
+            }
+        }
+
+        favoriteButton.setOnClickListener {
+            when (favoriteButton.drawable.constantState) {
+                getDrawable(R.drawable.ic_star)?.constantState -> {
+                    favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star_border))
+                    getSharedPreferences(getString(R.string.favoriteComics),Context.MODE_PRIVATE).edit()
+                        .remove(model.comic.title)
+                        .apply()
+                }
+                getDrawable(R.drawable.ic_star_border)?.constantState -> {
+                    favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star))
+                    getSharedPreferences(getString(R.string.favoriteComics),Context.MODE_PRIVATE).edit()
+                        .putInt(model.comic.title, model.comic.id)
+                        .apply()
+                }
             }
         }
     }

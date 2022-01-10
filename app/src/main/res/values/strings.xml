@@ -12,4 +12,5 @@
     <string name="comics">Comics</string>
 
     <string name="favoriteCharacters">characters</string>
+    <string name="favoriteComics">comics</string>
 </resources>
