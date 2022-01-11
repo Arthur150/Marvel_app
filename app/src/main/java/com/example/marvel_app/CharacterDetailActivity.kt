@@ -13,6 +13,9 @@ import com.example.marvel_app.adapter.ComicAdapter
 import com.example.marvel_app.adapter.SerieAdapter
 import com.example.marvel_app.model.MarvelCharacter.CharacterDetailViewModel
 import com.example.marvel_app.model.MarvelCharacter.MarvelCharacter
+import com.google.gson.Gson
+import com.google.zxing.BarcodeFormat
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.squareup.picasso.Picasso
 
 class CharacterDetailActivity : AppCompatActivity() {
@@ -20,6 +23,8 @@ class CharacterDetailActivity : AppCompatActivity() {
     private var comicAdapter: ComicAdapter? = null
 
     private var serieAdapter: SerieAdapter? = null
+
+    private var qrCode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +39,7 @@ class CharacterDetailActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.characterDetailRecyclerView)
         val button = findViewById<Button>(R.id.characterDetailButtonSwitchList)
         val favoriteButton = findViewById<ImageButton>(R.id.characterDetailFavorite)
+        val qrCodeButton = findViewById<ImageButton>(R.id.characterDetailQRCode)
 
         val id = getSharedPreferences(getString(R.string.favoriteCharacters), Context.MODE_PRIVATE)
             .getInt(model.character.name, -1)
@@ -116,6 +122,30 @@ class CharacterDetailActivity : AppCompatActivity() {
                     ).edit()
                         .putInt(model.character.name, model.character.id)
                         .apply()
+                }
+            }
+        }
+
+        val map = mapOf("type" to "character", "id" to model.character.id)
+        val barcodeEncoder = BarcodeEncoder()
+        val bitmap = barcodeEncoder.encodeBitmap(
+            Gson().toJson(map),
+            BarcodeFormat.QR_CODE, 400, 400
+        )
+
+        qrCodeButton.setOnClickListener {
+            qrCode = when (qrCode) {
+                false -> {
+                    imageView.setImageBitmap(bitmap)
+                    true
+                }
+                true -> {
+                    Picasso.with(this)
+                        .load("${model.character.thumbnail.path}.${model.character.thumbnail.extension}")
+                        .placeholder(R.drawable.ic_iron_man)
+                        .error(R.drawable.ic_iron_man)
+                        .into(imageView)
+                    false
                 }
             }
         }

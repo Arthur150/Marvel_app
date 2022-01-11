@@ -13,6 +13,9 @@ import com.example.marvel_app.adapter.CharacterAdapter
 import com.example.marvel_app.adapter.ComicAdapter
 import com.example.marvel_app.model.MarvelSerie.MarvelSerie
 import com.example.marvel_app.model.MarvelSerie.SerieDetailViewModel
+import com.google.gson.Gson
+import com.google.zxing.BarcodeFormat
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.squareup.picasso.Picasso
 
 class SerieDetailActivity : AppCompatActivity() {
@@ -20,6 +23,8 @@ class SerieDetailActivity : AppCompatActivity() {
     private var comicAdapter: ComicAdapter? = null
 
     private var characterAdapter: CharacterAdapter? = null
+
+    private var qrCode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +38,7 @@ class SerieDetailActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.serieDetailRecyclerView)
         val button = findViewById<Button>(R.id.serieDetailButtonSwitchList)
         val favoriteButton = findViewById<ImageButton>(R.id.serieDetailFavorite)
+        val qrCodeButton = findViewById<ImageButton>(R.id.serieDetailQRCode)
 
         val id = getSharedPreferences(getString(R.string.favoriteSeries), Context.MODE_PRIVATE)
             .getInt(model.serie.title, -1)
@@ -115,6 +121,30 @@ class SerieDetailActivity : AppCompatActivity() {
                     ).edit()
                         .putInt(model.serie.title, model.serie.id)
                         .apply()
+                }
+            }
+        }
+
+        val map = mapOf("type" to "serie", "id" to model.serie.id)
+        val barcodeEncoder = BarcodeEncoder()
+        val bitmap = barcodeEncoder.encodeBitmap(
+            Gson().toJson(map),
+            BarcodeFormat.QR_CODE, 400, 400
+        )
+
+        qrCodeButton.setOnClickListener {
+            qrCode = when (qrCode) {
+                false -> {
+                    imageView.setImageBitmap(bitmap)
+                    true
+                }
+                true -> {
+                    Picasso.with(this)
+                        .load("${model.serie.thumbnail.path}.${model.serie.thumbnail.extension}")
+                        .placeholder(R.drawable.ic_iron_man)
+                        .error(R.drawable.ic_iron_man)
+                        .into(imageView)
+                    false
                 }
             }
         }

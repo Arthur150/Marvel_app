@@ -14,11 +14,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.marvel_app.adapter.CharacterAdapter
 import com.example.marvel_app.model.MarvelComic.ComicDetailViewModel
 import com.example.marvel_app.model.MarvelComic.MarvelComic
+import com.google.gson.Gson
+import com.google.zxing.BarcodeFormat
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.squareup.picasso.Picasso
 
 class ComicDetailActivity : AppCompatActivity() {
 
     private var characterAdapter: CharacterAdapter? = null
+
+    private var qrCode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +41,7 @@ class ComicDetailActivity : AppCompatActivity() {
         val imageSerie = serieItem.findViewById<ImageView>(R.id.ComicDetailSerieItemImage)
         val titleSerie = serieItem.findViewById<TextView>(R.id.ComicDetailSerieItemTitle)
         val favoriteButton = findViewById<ImageButton>(R.id.comicDetailFavorite)
+        val qrCodeButton = findViewById<ImageButton>(R.id.comicDetailQRCode)
 
         val id = getSharedPreferences(getString(R.string.favoriteComics), Context.MODE_PRIVATE)
             .getInt(model.comic.title, -1)
@@ -132,6 +138,30 @@ class ComicDetailActivity : AppCompatActivity() {
                     ).edit()
                         .putInt(model.comic.title, model.comic.id)
                         .apply()
+                }
+            }
+        }
+
+        val map = mapOf("type" to "comic", "id" to model.comic.id)
+        val barcodeEncoder = BarcodeEncoder()
+        val bitmap = barcodeEncoder.encodeBitmap(
+            Gson().toJson(map),
+            BarcodeFormat.QR_CODE, 400, 400
+        )
+
+        qrCodeButton.setOnClickListener {
+            qrCode = when (qrCode) {
+                false -> {
+                    imageView.setImageBitmap(bitmap)
+                    true
+                }
+                true -> {
+                    Picasso.with(this)
+                        .load("${model.comic.thumbnail.path}.${model.comic.thumbnail.extension}")
+                        .placeholder(R.drawable.ic_iron_man)
+                        .error(R.drawable.ic_iron_man)
+                        .into(imageView)
+                    false
                 }
             }
         }

@@ -120,4 +120,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_star_border" />
 
+    <ImageButton
+        android:id="@+id/comicDetailQRCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:backgroundTint="@color/zxing_transparent"
+        app:layout_constraintEnd_toStartOf="@+id/comicDetailImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_qr_code" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
