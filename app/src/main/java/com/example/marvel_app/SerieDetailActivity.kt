@@ -35,9 +35,9 @@ class SerieDetailActivity : AppCompatActivity() {
         val favoriteButton = findViewById<ImageButton>(R.id.serieDetailFavorite)
 
         val id = getSharedPreferences(getString(R.string.favoriteSeries), Context.MODE_PRIVATE)
-            .getInt(model.serie.title,-1)
+            .getInt(model.serie.title, -1)
 
-        if (id == model.serie.id){
+        if (id == model.serie.id) {
             favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star))
         }
 
@@ -85,7 +85,7 @@ class SerieDetailActivity : AppCompatActivity() {
                     recyclerView.adapter = characterAdapter
                     button.setBackgroundColor(getColor(R.color.marvel_blue))
                     button.setTextColor(getColor(R.color.marvel_red))
-                    button.setText(R.string.comics)
+                    button.setText(R.string.characters)
                 }
                 CharacterAdapter::class.java -> {
                     recyclerView.adapter = comicAdapter
@@ -100,13 +100,19 @@ class SerieDetailActivity : AppCompatActivity() {
             when (favoriteButton.drawable.constantState) {
                 getDrawable(R.drawable.ic_star)?.constantState -> {
                     favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star_border))
-                    getSharedPreferences(getString(R.string.favoriteSeries),Context.MODE_PRIVATE).edit()
+                    getSharedPreferences(
+                        getString(R.string.favoriteSeries),
+                        Context.MODE_PRIVATE
+                    ).edit()
                         .remove(model.serie.title)
                         .apply()
                 }
                 getDrawable(R.drawable.ic_star_border)?.constantState -> {
                     favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star))
-                    getSharedPreferences(getString(R.string.favoriteSeries),Context.MODE_PRIVATE).edit()
+                    getSharedPreferences(
+                        getString(R.string.favoriteSeries),
+                        Context.MODE_PRIVATE
+                    ).edit()
                         .putInt(model.serie.title, model.serie.id)
                         .apply()
                 }

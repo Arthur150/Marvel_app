@@ -3,7 +3,6 @@ package com.example.marvel_app
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -39,9 +38,9 @@ class ComicDetailActivity : AppCompatActivity() {
         val favoriteButton = findViewById<ImageButton>(R.id.comicDetailFavorite)
 
         val id = getSharedPreferences(getString(R.string.favoriteComics), Context.MODE_PRIVATE)
-            .getInt(model.comic.title,-1)
+            .getInt(model.comic.title, -1)
 
-        if (id == model.comic.id){
+        if (id == model.comic.id) {
             favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star))
         }
 
@@ -118,13 +117,19 @@ class ComicDetailActivity : AppCompatActivity() {
             when (favoriteButton.drawable.constantState) {
                 getDrawable(R.drawable.ic_star)?.constantState -> {
                     favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star_border))
-                    getSharedPreferences(getString(R.string.favoriteComics),Context.MODE_PRIVATE).edit()
+                    getSharedPreferences(
+                        getString(R.string.favoriteComics),
+                        Context.MODE_PRIVATE
+                    ).edit()
                         .remove(model.comic.title)
                         .apply()
                 }
                 getDrawable(R.drawable.ic_star_border)?.constantState -> {
                     favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star))
-                    getSharedPreferences(getString(R.string.favoriteComics),Context.MODE_PRIVATE).edit()
+                    getSharedPreferences(
+                        getString(R.string.favoriteComics),
+                        Context.MODE_PRIVATE
+                    ).edit()
                         .putInt(model.comic.title, model.comic.id)
                         .apply()
                 }

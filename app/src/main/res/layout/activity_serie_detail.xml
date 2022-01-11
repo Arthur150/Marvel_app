@@ -33,7 +33,7 @@
     <TextView
         android:id="@+id/serieDetailDescription"
         android:layout_width="342dp"
-        android:layout_height="32dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:gravity="fill"
         android:text="@string/description"

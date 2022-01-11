@@ -44,7 +44,9 @@ class ComicDetailViewModel(val comic: MarvelComic) : ViewModel() {
         viewModelScope.launch {
             val jsonResponse = Gson().fromJson<JsonResponse<MarvelSerie>>(
                 Gson().toJson(
-                    GetMarvelComicSeriesUseCase(comic.series.resourceURI.split('/').last().toInt()).execute().getOrNull()
+                    GetMarvelComicSeriesUseCase(
+                        comic.series.resourceURI.split('/').last().toInt()
+                    ).execute().getOrNull()
                 ),
                 object : TypeToken<JsonResponse<MarvelSerie>>() {}.type
             )
