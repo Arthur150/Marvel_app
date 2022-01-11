@@ -20,7 +20,6 @@ android {
     }
 
 
-
     buildTypes {
         debug {
             buildConfigField("String", "marvel_api_key_public", localProperties["marvel_api_key.public"])
@@ -29,6 +28,35 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "environment"
+    productFlavors {
+        development {
+            dimension "environment"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+            ext {
+                wsUrl = "https://b8d0e3fc-5257-43b6-8a1f-e517b4ae3793.mock.pstmn.io"
+            }
+        }
+
+        production {
+            dimension "environment"
+            applicationIdSuffix = ".prod"
+            versionNameSuffix = "-prod"
+            ext {
+                wsUrl = "https://gateway.marvel.com:443"
+            }
+        }
+
+        applicationVariants.all { variant ->
+            def dimensions = variant.productFlavors
+            def environment = dimensions[0]
+
+            def wsUrl = environment.ext.wsUrl
+            variant.buildConfigField "String", "WSUrl", "\"$wsUrl\""
         }
     }
 
