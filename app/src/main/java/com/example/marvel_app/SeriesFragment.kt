@@ -5,16 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvel_app.adapter.SerieAdapter
+import com.example.marvel_app.model.MarvelComic.ComicViewModel
 import com.example.marvel_app.model.MarvelSerie.SerieViewModel
 
 class SeriesFragment : Fragment() {
 
     private var serieAdapter: SerieAdapter? = null
-
-    private val model = SerieViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +27,8 @@ class SeriesFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         serieAdapter = SerieAdapter(requireContext(), emptyList())
         recyclerView.adapter = serieAdapter
+
+        val model = ViewModelProvider(this)[SerieViewModel::class.java]
 
         model.getSeries()
             .observe(viewLifecycleOwner, { series ->

@@ -5,16 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvel_app.adapter.ComicAdapter
+import com.example.marvel_app.model.MarvelCharacter.CharacterViewModel
 import com.example.marvel_app.model.MarvelComic.ComicViewModel
 
 class ComicsFragment : Fragment() {
 
     private var comicAdapter: ComicAdapter? = null
-
-    private val model = ComicViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +27,8 @@ class ComicsFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         comicAdapter = ComicAdapter(requireContext(), emptyList())
         recyclerView.adapter = comicAdapter
+
+        val model = ViewModelProvider(this)[ComicViewModel::class.java]
 
         model.getComics()
             .observe(viewLifecycleOwner, { comics ->
