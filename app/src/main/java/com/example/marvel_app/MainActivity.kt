@@ -1,6 +1,8 @@
 package com.example.marvel_app
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,6 +18,12 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView = findViewById(R.id.bottomNavBar)
         initNav()
+
+        val scanQRCodeButton = findViewById<ImageButton>(R.id.mainQRCodeScanner)
+
+        scanQRCodeButton.setOnClickListener {
+            startActivity(Intent(this,QRCodeScannerActivity::class.java))
+        }
 
 
     }

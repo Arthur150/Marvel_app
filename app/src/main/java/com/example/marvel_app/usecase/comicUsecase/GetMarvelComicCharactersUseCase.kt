@@ -15,7 +15,6 @@ class GetMarvelComicCharactersUseCase(private val comicId: Int, private val offs
                 ApiClient.service.getComicCharacters(comicId, offset)
 
             if (response.isSuccessful) {
-                Log.d("api", "execute: comicCharacters")
                 Result.success(response.body())
             } else throw IllegalStateException("${response.code()}")
 

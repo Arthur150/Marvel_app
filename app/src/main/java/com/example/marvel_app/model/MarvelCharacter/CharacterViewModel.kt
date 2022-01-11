@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.marvel_app.model.JsonResponse
-import com.example.marvel_app.usecase.characterUsecase.GetMarvelCharacterUseCase
+import com.example.marvel_app.usecase.characterUsecase.GetMarvelCharactersUseCase
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.launch
@@ -29,10 +29,9 @@ class CharacterViewModel : ViewModel() {
     fun loadCharacters() {
         viewModelScope.launch {
             val jsonResponse = Gson().fromJson<JsonResponse<MarvelCharacter>>(
-                Gson().toJson(GetMarvelCharacterUseCase(offset).execute().getOrNull()),
+                Gson().toJson(GetMarvelCharactersUseCase(offset).execute().getOrNull()),
                 object : TypeToken<JsonResponse<MarvelCharacter>>() {}.type
             )
-            Log.d("ViewModel", "loadCharacters: $jsonResponse")
 
             offset = jsonResponse.data.offset + jsonResponse.data.count
 

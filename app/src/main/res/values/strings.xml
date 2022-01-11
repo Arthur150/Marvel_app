@@ -14,4 +14,7 @@
     <string name="favoriteCharacters">characters</string>
     <string name="favoriteComics">comics</string>
     <string name="favoriteSeries">series</string>
+    <string name="cameraError">Camera error</string>
+    <string name="cameraGranted">Camera granted</string>
+    <string name="cameraNotGranted">Camera not granted</string>
 </resources>

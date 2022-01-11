@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.marvel_app.adapter.CharacterAdapter
 import com.example.marvel_app.model.MarvelComic.ComicDetailViewModel
 import com.example.marvel_app.model.MarvelComic.MarvelComic
+import com.example.marvel_app.model.QRCode.QRCodeData
 import com.google.gson.Gson
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -142,10 +143,10 @@ class ComicDetailActivity : AppCompatActivity() {
             }
         }
 
-        val map = mapOf("type" to "comic", "id" to model.comic.id)
+        val data = QRCodeData("comic",model.comic.id)
         val barcodeEncoder = BarcodeEncoder()
         val bitmap = barcodeEncoder.encodeBitmap(
-            Gson().toJson(map),
+            Gson().toJson(data),
             BarcodeFormat.QR_CODE, 400, 400
         )
 

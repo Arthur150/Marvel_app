@@ -13,6 +13,7 @@ import com.example.marvel_app.adapter.ComicAdapter
 import com.example.marvel_app.adapter.SerieAdapter
 import com.example.marvel_app.model.MarvelCharacter.CharacterDetailViewModel
 import com.example.marvel_app.model.MarvelCharacter.MarvelCharacter
+import com.example.marvel_app.model.QRCode.QRCodeData
 import com.google.gson.Gson
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -126,10 +127,10 @@ class CharacterDetailActivity : AppCompatActivity() {
             }
         }
 
-        val map = mapOf("type" to "character", "id" to model.character.id)
+        val data = QRCodeData("character",model.character.id)
         val barcodeEncoder = BarcodeEncoder()
         val bitmap = barcodeEncoder.encodeBitmap(
-            Gson().toJson(map),
+            Gson().toJson(data),
             BarcodeFormat.QR_CODE, 400, 400
         )
 
