@@ -10,4 +10,8 @@
     <string name="serie_picture">serie picture</string>
     <string name="description">Description</string>
     <string name="comics">Comics</string>
+
+    <string name="favoriteCharacters">characters</string>
+    <string name="favoriteComics">comics</string>
+    <string name="favoriteSeries">series</string>
 </resources>

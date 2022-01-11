@@ -68,4 +68,16 @@
         app:layout_constraintStart_toStartOf="@+id/serieDetailDescription"
         app:layout_constraintTop_toBottomOf="@+id/serieDetailDescription" />
 
+    <ImageButton
+        android:id="@+id/serieDetailFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:backgroundTint="@color/cardview_shadow_end_color"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/serieDetailImage"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_star_border" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

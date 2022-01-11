@@ -1,8 +1,10 @@
 package com.example.marvel_app
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +33,14 @@ class CharacterDetailActivity : AppCompatActivity() {
         val descriptionView = findViewById<TextView>(R.id.characterDetailDescription)
         val recyclerView = findViewById<RecyclerView>(R.id.characterDetailRecyclerView)
         val button = findViewById<Button>(R.id.characterDetailButtonSwitchList)
+        val favoriteButton = findViewById<ImageButton>(R.id.characterDetailFavorite)
+
+        val id = getSharedPreferences(getString(R.string.favoriteCharacters),Context.MODE_PRIVATE)
+            .getInt(model.character.name,-1)
+
+        if (id == model.character.id){
+            favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star))
+        }
 
         Picasso.with(this)
             .load("${model.character.thumbnail.path}.${model.character.thumbnail.extension}")
@@ -83,6 +93,23 @@ class CharacterDetailActivity : AppCompatActivity() {
                     button.setBackgroundColor(getColor(R.color.marvel_blue))
                     button.setTextColor(getColor(R.color.marvel_red))
                     button.setText(R.string.comics)
+                }
+            }
+        }
+
+        favoriteButton.setOnClickListener {
+            when (favoriteButton.drawable.constantState) {
+                getDrawable(R.drawable.ic_star)?.constantState -> {
+                    favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star_border))
+                    getSharedPreferences(getString(R.string.favoriteCharacters),Context.MODE_PRIVATE).edit()
+                        .remove(model.character.name)
+                        .apply()
+                }
+                getDrawable(R.drawable.ic_star_border)?.constantState -> {
+                    favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star))
+                    getSharedPreferences(getString(R.string.favoriteCharacters),Context.MODE_PRIVATE).edit()
+                        .putInt(model.character.name, model.character.id)
+                        .apply()
                 }
             }
         }
