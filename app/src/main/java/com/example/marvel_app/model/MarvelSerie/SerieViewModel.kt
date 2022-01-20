@@ -32,7 +32,6 @@ class SerieViewModel : ViewModel() {
                 Gson().toJson(GetMarvelSeriesUseCase(offset).execute().getOrNull()),
                 object : TypeToken<JsonResponse<MarvelSerie>>() {}.type
             )
-            Log.d("ViewModel", "loadSeries: $jsonResponse")
 
             offset = jsonResponse.data.offset + jsonResponse.data.count
 

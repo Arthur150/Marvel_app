@@ -53,7 +53,6 @@ class CharacterDetailViewModel(val character: MarvelCharacter) : ViewModel() {
                 ),
                 object : TypeToken<JsonResponse<MarvelComic>>() {}.type
             )
-            Log.d("ViewModel", "loadComics: $jsonResponse")
 
             offsetComics = jsonResponse.data.offset + jsonResponse.data.count
 
@@ -76,7 +75,6 @@ class CharacterDetailViewModel(val character: MarvelCharacter) : ViewModel() {
                 ),
                 object : TypeToken<JsonResponse<MarvelSerie>>() {}.type
             )
-            Log.d("ViewModel", "loadSeries: $jsonResponse")
 
             offsetSeries = jsonResponse.data.offset + jsonResponse.data.count
 

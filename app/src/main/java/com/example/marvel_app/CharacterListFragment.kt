@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
@@ -14,8 +15,6 @@ import com.example.marvel_app.model.MarvelCharacter.CharacterViewModel
 class CharacterListFragment : Fragment() {
 
     private var characterAdapter: CharacterAdapter? = null
-
-    private val model = CharacterViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +27,8 @@ class CharacterListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         characterAdapter = CharacterAdapter(requireContext(), emptyList())
         recyclerView.adapter = characterAdapter
+
+        val model = ViewModelProvider(this)[CharacterViewModel::class.java]
 
         model.getCharacters()
             .observe(viewLifecycleOwner, { characters ->
