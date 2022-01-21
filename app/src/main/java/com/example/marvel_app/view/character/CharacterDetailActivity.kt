@@ -1,6 +1,7 @@
-package com.example.marvel_app
+package com.example.marvel_app.view.character
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -9,11 +10,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.marvel_app.R
 import com.example.marvel_app.adapter.ComicAdapter
 import com.example.marvel_app.adapter.SerieAdapter
 import com.example.marvel_app.model.MarvelCharacter.CharacterDetailViewModel
 import com.example.marvel_app.model.MarvelCharacter.MarvelCharacter
 import com.example.marvel_app.model.QRCode.QRCodeData
+import com.example.marvel_app.view.MainActivity
 import com.google.gson.Gson
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -127,7 +130,7 @@ class CharacterDetailActivity : AppCompatActivity() {
             }
         }
 
-        val data = QRCodeData("character",model.character.id)
+        val data = QRCodeData("character", model.character.id)
         val barcodeEncoder = BarcodeEncoder()
         val bitmap = barcodeEncoder.encodeBitmap(
             Gson().toJson(data),
@@ -154,5 +157,9 @@ class CharacterDetailActivity : AppCompatActivity() {
 
     }
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
 }

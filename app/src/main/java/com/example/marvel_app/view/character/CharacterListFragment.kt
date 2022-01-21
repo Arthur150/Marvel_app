@@ -1,4 +1,4 @@
-package com.example.marvel_app
+package com.example.marvel_app.view.character
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
+import com.example.marvel_app.R
 import com.example.marvel_app.adapter.CharacterAdapter
 import com.example.marvel_app.model.MarvelCharacter.CharacterViewModel
 

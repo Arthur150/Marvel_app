@@ -1,4 +1,4 @@
-package com.example.marvel_app
+package com.example.marvel_app.view.comic
 
 import android.content.Context
 import android.content.Intent
@@ -11,10 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.marvel_app.R
 import com.example.marvel_app.adapter.CharacterAdapter
 import com.example.marvel_app.model.MarvelComic.ComicDetailViewModel
 import com.example.marvel_app.model.MarvelComic.MarvelComic
 import com.example.marvel_app.model.QRCode.QRCodeData
+import com.example.marvel_app.view.MainActivity
+import com.example.marvel_app.view.serie.SerieDetailActivity
 import com.google.gson.Gson
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -51,7 +54,7 @@ class ComicDetailActivity : AppCompatActivity() {
             favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star))
         }
 
-        val serie = model.loadSerie()
+        model.loadSerie()
 
         model.getSerie()
             .observe(this, { serie ->
@@ -143,7 +146,7 @@ class ComicDetailActivity : AppCompatActivity() {
             }
         }
 
-        val data = QRCodeData("comic",model.comic.id)
+        val data = QRCodeData("comic", model.comic.id)
         val barcodeEncoder = BarcodeEncoder()
         val bitmap = barcodeEncoder.encodeBitmap(
             Gson().toJson(data),
@@ -166,5 +169,11 @@ class ComicDetailActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 }

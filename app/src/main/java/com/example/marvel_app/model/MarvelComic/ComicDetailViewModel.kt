@@ -1,6 +1,5 @@
 package com.example.marvel_app.model.MarvelComic
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -75,4 +74,6 @@ class ComicDetailViewModel(val comic: MarvelComic) : ViewModel() {
             characters.postValue(tempList)
         }
     }
+
+
 }

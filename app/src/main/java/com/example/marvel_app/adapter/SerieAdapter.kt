@@ -9,8 +9,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvel_app.R
-import com.example.marvel_app.SerieDetailActivity
 import com.example.marvel_app.model.MarvelSerie.MarvelSerie
+import com.example.marvel_app.view.serie.SerieDetailActivity
 import com.squareup.picasso.Picasso
 
 class SerieAdapter(

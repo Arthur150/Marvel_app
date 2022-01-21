@@ -1,6 +1,7 @@
-package com.example.marvel_app
+package com.example.marvel_app.view.serie
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -9,11 +10,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.marvel_app.R
 import com.example.marvel_app.adapter.CharacterAdapter
 import com.example.marvel_app.adapter.ComicAdapter
 import com.example.marvel_app.model.MarvelSerie.MarvelSerie
 import com.example.marvel_app.model.MarvelSerie.SerieDetailViewModel
 import com.example.marvel_app.model.QRCode.QRCodeData
+import com.example.marvel_app.view.MainActivity
 import com.google.gson.Gson
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -126,7 +129,7 @@ class SerieDetailActivity : AppCompatActivity() {
             }
         }
 
-        val data = QRCodeData("serie",model.serie.id)
+        val data = QRCodeData("serie", model.serie.id)
         val barcodeEncoder = BarcodeEncoder()
         val bitmap = barcodeEncoder.encodeBitmap(
             Gson().toJson(data),
@@ -149,5 +152,11 @@ class SerieDetailActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 }

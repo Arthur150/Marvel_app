@@ -1,18 +1,21 @@
-package com.example.marvel_app
+package com.example.marvel_app.view
 
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.budiyev.android.codescanner.*
+import com.example.marvel_app.R
 import com.example.marvel_app.model.QRCode.QRCodeData
 import com.example.marvel_app.model.QRCode.ScanQRCodeViewModel
+import com.example.marvel_app.view.character.CharacterDetailActivity
+import com.example.marvel_app.view.comic.ComicDetailActivity
+import com.example.marvel_app.view.serie.SerieDetailActivity
 import com.google.gson.Gson
 
 class QRCodeScannerActivity : AppCompatActivity() {

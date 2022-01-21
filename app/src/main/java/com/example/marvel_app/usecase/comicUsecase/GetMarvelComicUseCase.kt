@@ -1,10 +1,8 @@
 package com.example.marvel_app.usecase.comicUsecase
 
-import android.util.Log
 import com.example.marvel_app.api.ApiClient
 import com.example.marvel_app.model.JsonResponse
 import com.example.marvel_app.model.MarvelComic.MarvelComic
-import com.example.marvel_app.model.MarvelSerie.MarvelSerie
 import com.example.marvel_app.usecase.UseCase
 import retrofit2.Response
 

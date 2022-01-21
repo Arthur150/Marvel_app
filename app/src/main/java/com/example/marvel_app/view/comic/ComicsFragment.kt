@@ -1,4 +1,4 @@
-package com.example.marvel_app
+package com.example.marvel_app.view.comic
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.marvel_app.R
 import com.example.marvel_app.adapter.ComicAdapter
-import com.example.marvel_app.model.MarvelCharacter.CharacterViewModel
 import com.example.marvel_app.model.MarvelComic.ComicViewModel
 
 class ComicsFragment : Fragment() {

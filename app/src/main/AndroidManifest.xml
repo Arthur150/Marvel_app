@@ -15,22 +15,22 @@
         android:theme="@style/Theme.Marvel_app"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".QRCodeScannerActivity"
+            android:name=".view.QRCodeScannerActivity"
             android:exported="false" />
         <activity
-            android:name=".ComicDetailActivity"
+            android:name=".view.comic.ComicDetailActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".view.MainActivity" />
         <activity
-            android:name=".SerieDetailActivity"
+            android:name=".view.serie.SerieDetailActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".view.MainActivity" />
         <activity
-            android:name=".CharacterDetailActivity"
+            android:name=".view.character.CharacterDetailActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".view.MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

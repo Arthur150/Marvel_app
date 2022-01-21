@@ -1,6 +1,5 @@
 package com.example.marvel_app.usecase.characterUsecase
 
-import android.util.Log
 import com.example.marvel_app.api.ApiClient
 import com.example.marvel_app.model.JsonResponse
 import com.example.marvel_app.model.MarvelSerie.MarvelSerie

@@ -1,10 +1,14 @@
-package com.example.marvel_app
+package com.example.marvel_app.view
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.marvel_app.R
+import com.example.marvel_app.view.character.CharacterListFragment
+import com.example.marvel_app.view.comic.ComicsFragment
+import com.example.marvel_app.view.serie.SeriesFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 
@@ -22,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         val scanQRCodeButton = findViewById<ImageButton>(R.id.mainQRCodeScanner)
 
         scanQRCodeButton.setOnClickListener {
-            startActivity(Intent(this,QRCodeScannerActivity::class.java))
+            startActivity(Intent(this, QRCodeScannerActivity::class.java))
         }
 
 
