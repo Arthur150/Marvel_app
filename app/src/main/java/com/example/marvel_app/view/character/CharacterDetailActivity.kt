@@ -3,6 +3,7 @@ package com.example.marvel_app.view.character
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -30,6 +31,8 @@ class CharacterDetailActivity : AppCompatActivity() {
 
     private var qrCode = false
 
+    private var favorite = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_character_detail)
@@ -47,6 +50,10 @@ class CharacterDetailActivity : AppCompatActivity() {
 
         val id = getSharedPreferences(getString(R.string.favoriteCharacters), Context.MODE_PRIVATE)
             .getInt(model.character.name, -1)
+
+        if (id != -1){
+            favorite = true
+        }
 
         if (id == model.character.id) {
             favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star))
@@ -108,8 +115,8 @@ class CharacterDetailActivity : AppCompatActivity() {
         }
 
         favoriteButton.setOnClickListener {
-            when (favoriteButton.drawable.constantState) {
-                getDrawable(R.drawable.ic_star)?.constantState -> {
+            when (favorite) {
+                true -> {
                     favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star_border))
                     getSharedPreferences(
                         getString(R.string.favoriteCharacters),
@@ -117,8 +124,9 @@ class CharacterDetailActivity : AppCompatActivity() {
                     ).edit()
                         .remove(model.character.name)
                         .apply()
+                    favorite = false
                 }
-                getDrawable(R.drawable.ic_star_border)?.constantState -> {
+                false -> {
                     favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star))
                     getSharedPreferences(
                         getString(R.string.favoriteCharacters),
@@ -126,6 +134,7 @@ class CharacterDetailActivity : AppCompatActivity() {
                     ).edit()
                         .putInt(model.character.name, model.character.id)
                         .apply()
+                    favorite = true
                 }
             }
         }

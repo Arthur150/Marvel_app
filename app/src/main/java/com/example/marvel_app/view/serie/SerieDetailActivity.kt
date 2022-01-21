@@ -30,6 +30,8 @@ class SerieDetailActivity : AppCompatActivity() {
 
     private var qrCode = false
 
+    private var favorite = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_serie_detail)
@@ -46,6 +48,10 @@ class SerieDetailActivity : AppCompatActivity() {
 
         val id = getSharedPreferences(getString(R.string.favoriteSeries), Context.MODE_PRIVATE)
             .getInt(model.serie.title, -1)
+
+        if (id != -1){
+            favorite = true
+        }
 
         if (id == model.serie.id) {
             favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star))
@@ -107,8 +113,8 @@ class SerieDetailActivity : AppCompatActivity() {
         }
 
         favoriteButton.setOnClickListener {
-            when (favoriteButton.drawable.constantState) {
-                getDrawable(R.drawable.ic_star)?.constantState -> {
+            when (favorite) {
+                true -> {
                     favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star_border))
                     getSharedPreferences(
                         getString(R.string.favoriteSeries),
@@ -116,8 +122,9 @@ class SerieDetailActivity : AppCompatActivity() {
                     ).edit()
                         .remove(model.serie.title)
                         .apply()
+                    favorite = false
                 }
-                getDrawable(R.drawable.ic_star_border)?.constantState -> {
+                false -> {
                     favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star))
                     getSharedPreferences(
                         getString(R.string.favoriteSeries),
@@ -125,6 +132,7 @@ class SerieDetailActivity : AppCompatActivity() {
                     ).edit()
                         .putInt(model.serie.title, model.serie.id)
                         .apply()
+                    favorite = true
                 }
             }
         }

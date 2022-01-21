@@ -29,6 +29,8 @@ class ComicDetailActivity : AppCompatActivity() {
 
     private var qrCode = false
 
+    private var favorite = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comic_detail)
@@ -49,6 +51,10 @@ class ComicDetailActivity : AppCompatActivity() {
 
         val id = getSharedPreferences(getString(R.string.favoriteComics), Context.MODE_PRIVATE)
             .getInt(model.comic.title, -1)
+
+        if (id != -1){
+            favorite = true
+        }
 
         if (id == model.comic.id) {
             favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star))
@@ -124,8 +130,8 @@ class ComicDetailActivity : AppCompatActivity() {
         }
 
         favoriteButton.setOnClickListener {
-            when (favoriteButton.drawable.constantState) {
-                getDrawable(R.drawable.ic_star)?.constantState -> {
+            when (favorite) {
+                true -> {
                     favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star_border))
                     getSharedPreferences(
                         getString(R.string.favoriteComics),
@@ -133,8 +139,9 @@ class ComicDetailActivity : AppCompatActivity() {
                     ).edit()
                         .remove(model.comic.title)
                         .apply()
+                    favorite = false
                 }
-                getDrawable(R.drawable.ic_star_border)?.constantState -> {
+                false -> {
                     favoriteButton.setImageDrawable(getDrawable(R.drawable.ic_star))
                     getSharedPreferences(
                         getString(R.string.favoriteComics),
@@ -142,6 +149,7 @@ class ComicDetailActivity : AppCompatActivity() {
                     ).edit()
                         .putInt(model.comic.title, model.comic.id)
                         .apply()
+                    favorite = true
                 }
             }
         }
